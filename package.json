@@ -1,0 +1,12 @@
+{
+  "name": "node-409",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Tomas Srna",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4",
+    "http-proxy": "^1.16.2",
+    "morgan": "^1.8.2"
+  }
+}

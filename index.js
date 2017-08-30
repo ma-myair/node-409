@@ -10,18 +10,49 @@ const apiProxy = httpProxy.createProxyServer({ secure: false });
 const serverNP = 'https://mb.np.my....cz' // TUTO Dopln server (ten mb.np.my....cz)
 var morgan = require('morgan')
 
-var logger = morgan('dev')
+const responseSlotNotAvailable = `{
+  "errorCode": "SLOT_NOT_AVAILABLE",
+  "errorMessage": "Some message"
+}`
 
-app.use(logger)
+const responseRohlikOrderFailed = `{
+  "errorCode": "ROHLIK_ORDER_FAILED",
+  "errorMessage": "Some message"
+}`
 
+const responseUnavailableProduct = `{
+  "errorCode": "UNAVAILABLE_PRODUCT",
+  "errorMessage": "Some message"
+}`
+
+const responseUnknownAddress = `{
+  "errorCode": "UNKNOWN_ADDRESS",
+  "errorMessage": "Some message"
+}`
+
+const responseUnreachableAddress = `{
+  "errorCode": "UNREACHABLE_ADDRESS",
+  "errorMessage": "Some message"
+}`
+
+app.use(morgan('dev'))
+
+// Finish Order
 app.post('/de05/joyBasket/v1/finishedOrders/*', function (req, res) {
 	res.status(409)
 	res.setHeader('Content-Type', 'application/json')
 
-	const responseSlotNotAvailable = `{
-  "errorCode": "SLOT_NOT_AVAILABLE",
-  "errorMessage": "Some message"
-}`
+	// TUTO Zmen
+	const response = responseSlotNotAvailable
+	console.log(response)
+
+	res.send(response)
+})
+
+// Send Order
+app.put('/de05/joyBasket/v1/finishedOrders/*', function (req, res) {
+	res.status(409)
+	res.setHeader('Content-Type', 'application/json')
 
 	// TUTO Zmen
 	const response = responseSlotNotAvailable

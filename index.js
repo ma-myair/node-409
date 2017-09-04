@@ -35,31 +35,71 @@ const responseUnreachableAddress = `{
   "errorMessage": "Some message"
 }`
 
+const responseAvailableAlternatives = `{
+	"result": "UNAVAILABLE_PRODUCT",
+	"address": {
+		"id": 14785,
+		"full": "Dejvická 316/15, Praha 16000"
+	},
+	"availableProducts": [{
+			"id": 207,
+			"name": "Bezlepková makronka",
+			"description": "Vypálená nejprestižnějšího vystřídalo nádorovité nějaké ho čtvrti posly nunavut netopýrům dá a kůži typy už sněžných vysokých vlivů dospělého a světových starověkého.",
+			"productDetail": "Test",
+			"mainPictureName": "macaron_v2.png",
+			"pictureNames": ["macaron_other_v3.png"],
+			"price": 89
+		},
+		{
+			"id": 113,
+			"name": "Domácí destilační zařízení",
+			"description": "Větvích v chování křižovatkách ságy o vzhledu.",
+			"productDetail": "Test",
+			"mainPictureName": "alcohol_v1.png",
+			"pictureNames": ["alcohol_other_v2.png"],
+			"price": 3499
+		}
+	]
+}`
+
 app.use(morgan('dev'))
 
-// Finish Order
-app.post('/de05/joyBasket/v1/finishedOrders/*', function (req, res) {
-	res.status(409)
-	res.setHeader('Content-Type', 'application/json')
 
-	// TUTO Zmen
-	const response = responseSlotNotAvailable
-	console.log(response)
+// Availability
+// app.get('/de05/joyBasket/v1/availability*', function (req, res) {
+// 	res.status(200)
+// 	res.setHeader('Content-Type', 'application/json')
 
-	res.send(response)
-})
+// 	// TUTO Zmen
+// 	const response = responseUnknownAddress
+// 	console.log(response)
 
-// Send Order
-app.put('/de05/joyBasket/v1/finishedOrders/*', function (req, res) {
-	res.status(409)
-	res.setHeader('Content-Type', 'application/json')
+// 	res.send(response)
+// })
 
-	// TUTO Zmen
-	const response = responseSlotNotAvailable
-	console.log(response)
+// // Finish Order
+// app.post('/de05/joyBasket/v1/finishedOrders/*', function (req, res) {
+// 	res.status(409)
+// 	res.setHeader('Content-Type', 'application/json')
 
-	res.send(response)
-})
+// 	// TUTO Zmen
+// 	const response = responseUnreachableAddress
+// 	console.log(response)
+
+// 	res.send(response)
+// })
+
+// // Send Order
+// app.put('/de05/joyBasket/v1/finishedOrders/*', function (req, res) {
+// 	res.status(409)
+// 	res.setHeader('Content-Type', 'application/json')
+
+// 	// TUTO Zmen
+// 	const response = responseUnreachableAddress
+// 	console.log(response)
+
+// 	res.send(response)
+// })
 
 app.all('*', function (req, res) {
 	console.log('proxying to '+serverNP);

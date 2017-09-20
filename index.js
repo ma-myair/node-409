@@ -6,7 +6,7 @@ const https = require('https')
 const fs = require('fs')
 const port = 3000
 const httpProxy = require('http-proxy');
-const apiProxy = httpProxy.createProxyServer({ secure: false });
+const apiProxy = httpProxy.createProxyServer({ secure: false, changeOrigin: true });
 const serverNP = 'https://mb.np.my....cz' // TUTO Dopln server (ten mb.np.my....cz)
 var morgan = require('morgan')
 
@@ -66,7 +66,7 @@ app.use(morgan('dev'))
 
 
 // Availability
-// app.get('/de05/joyBasket/v1/availability*', function (req, res) {
+// app.get('/te00/joyBasket/v1/availability*', function (req, res) {
 // 	res.status(200)
 // 	res.setHeader('Content-Type', 'application/json')
 
@@ -78,7 +78,7 @@ app.use(morgan('dev'))
 // })
 
 // // Finish Order
-// app.post('/de05/joyBasket/v1/finishedOrders/*', function (req, res) {
+// app.post('/te00/joyBasket/v1/finishedOrders/*', function (req, res) {
 // 	res.status(409)
 // 	res.setHeader('Content-Type', 'application/json')
 
@@ -90,16 +90,16 @@ app.use(morgan('dev'))
 // })
 
 // // Send Order
-// app.put('/de05/joyBasket/v1/finishedOrders/*', function (req, res) {
-// 	res.status(409)
-// 	res.setHeader('Content-Type', 'application/json')
+app.put('/te00/joyBasket/v1/finishedOrders/*', function (req, res) {
+	res.status(409)
+	res.setHeader('Content-Type', 'application/json')
 
-// 	// TUTO Zmen
-// 	const response = responseUnreachableAddress
-// 	console.log(response)
+	// TUTO Zmen
+	const response = responseUnavailableProduct
+	console.log(response)
 
-// 	res.send(response)
-// })
+	res.send(response)
+})
 
 app.all('*', function (req, res) {
 	console.log('proxying to '+serverNP);
